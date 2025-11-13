@@ -11,10 +11,10 @@ pipeline {
         stage('Setup') {
             steps {
                 script {
-                    // Create virtual environment
+                    
                     bat "\"${PYTHON}\" -m venv ${VENV}"
 
-                    // Install dependencies
+                  
                     bat """
                         ${VENV}\\Scripts\\python.exe -m pip install --upgrade pip
                         ${VENV}\\Scripts\\pip.exe install -r requirements.txt
@@ -33,15 +33,16 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                script {
-                    bat """
-                        ${VENV}\\Scripts\\pytest.exe
-                    """
-                }
-            }
+       stage('Test') {
+    steps {
+        script {
+            bat """
+            set PYTHONPATH=%WORKSPACE%
+            venv\\Scripts\\pytest.exe
+            """
         }
+    }
+}
 
         stage('Deploy') {
             steps {
