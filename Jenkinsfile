@@ -54,7 +54,16 @@ stage('Coverage') {
         }
     }
 }
-
+stage('Security Scan') {
+    steps {
+        script {
+            bat """
+            set PYTHONPATH=%WORKSPACE%
+            venv\\Scripts\\bandit.exe -r .
+            """
+        }
+    }
+}
 
         stage('Deploy') {
             steps {
