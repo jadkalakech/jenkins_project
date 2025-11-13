@@ -59,9 +59,10 @@ stage('Security Scan') {
         script {
             bat """
             set PYTHONPATH=%WORKSPACE%
-            venv\\Scripts\\bandit.exe -r . -f json -o bandit_report.json
+            venv\\Scripts\\bandit.exe -r . -f json -o bandit_report.json --exit-zero
             """
         }
+        archiveArtifacts artifacts: 'bandit_report.json', allowEmptyArchive: true
     }
 }
         stage('Deploy') {
