@@ -65,12 +65,12 @@ stage('Security Scan') {
         archiveArtifacts artifacts: 'bandit_report.json', allowEmptyArchive: true
     }
 }
-        stage('Deploy') {
-            steps {
-                echo "Deploy stage completed successfully."
-            }
-        }
-    }
+     stage('Deploy') {
+  steps {
+    echo "Deploying application..."
+    powershell "Write-Host 'Deployment successful!'"
+  }
+}
 
     post {
         always {
