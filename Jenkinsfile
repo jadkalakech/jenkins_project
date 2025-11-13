@@ -43,6 +43,18 @@ pipeline {
         }
     }
 }
+stage('Coverage') {
+    steps {
+        script {
+            bat """
+            set PYTHONPATH=%WORKSPACE%
+            venv\\Scripts\\python.exe -m coverage run -m pytest
+            venv\\Scripts\\python.exe -m coverage report
+            """
+        }
+    }
+}
+
 
         stage('Deploy') {
             steps {
