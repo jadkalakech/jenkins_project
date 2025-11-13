@@ -59,12 +59,11 @@ stage('Security Scan') {
         script {
             bat """
             set PYTHONPATH=%WORKSPACE%
-            venv\\Scripts\\bandit.exe -r .
+            venv\\Scripts\\bandit.exe -r . -f json -o bandit_report.json
             """
         }
     }
 }
-
         stage('Deploy') {
             steps {
                 echo "Deploy stage completed successfully."
